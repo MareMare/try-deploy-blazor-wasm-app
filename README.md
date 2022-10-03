@@ -3,8 +3,12 @@ Blazor アプリを Azure static web apps へデプロイしてみます。
 
 ついでなので GitHub Pages にもデプロイしてみます。
 
-
 ![Azure Static Web Apps CI/CD](https://github.com/MareMare/try-azure-static-blazor-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg?branch=master)
+
+## 実際にデプロイしたサイト
+
+* https://brave-stone-0645cc000.2.azurestaticapps.net/
+* https://maremare.github.io/try-azure-static-blazor-app/
 
 ## 前提条件
 
@@ -198,6 +202,10 @@ GitHub Pages へ発行するには次の調整が必要になるらしい。
 使い方は次の通り：
 1. `PublishSPAforGitHubPages.Build` Nuget パッケージ参照を追加
 2. GitHub Actions でワークフローで `GHPages` MSBuild プロパティを指定して発行
+3. GitHub Pages の設定
+
+    ![](images/08.png)
+
 
 ワークフローの例：
 ```yml
