@@ -32,9 +32,8 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/TryAzureStaticBlazorApp/TryAzureStaticBlazorApp.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "--project",
+                "${workspaceFolder}/TryAzureStaticBlazorApp/TryAzureStaticBlazorApp.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
