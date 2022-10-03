@@ -154,15 +154,16 @@ dotnet build
 
     |項目|修正前|修正後|
     |---|---|---|
-    |app_location|"Client"|app_location 要素を削除|
-    |api_location|"Api"|"/TryAzureStaticBlazorApp"|
+    |app_location|"Client"|"/TryAzureStaticBlazorApp"|
+    |api_location|"Api"|"Api"|
     |app_artifact_location|"wwwroot"|"wwwroot"|
 
     ```yml
-    ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
+    ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
     # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-    app_location: "/TryAzureStaticBlazorApp"
-    app_artifact_location: "wwwroot" # Built app content directory - optional
+    app_location: "/TryAzureStaticBlazorApp" # App source code path
+    api_location: "Api" # Api source code path - optional
+    output_location: "wwwroot" # Built app content directory - optional
     ###### End of Repository/Build Configurations ######
     ```
 
