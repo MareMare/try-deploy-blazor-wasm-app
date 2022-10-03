@@ -207,6 +207,12 @@ GitHub Pages へ発行するには次の調整が必要になるらしい。
 
     ![](images/08.png)
 
+注意点：
+* ベースURLを自分で指定したい
+  * `GHPagesBase` MSBuild プロパティで指定できるらしい
+    > If you want to specify the base URL by yourself, you can do it by setting the base URL to MSBuild property explicitly.
+  * `-p:GHPages=true -p:GHPagesBase="/ベースURL/"`
+  * `index.html` で `<link href="favicon.ico" rel="icon" />`
 
 ワークフローの例：
 ```yml
@@ -240,7 +246,7 @@ jobs:
     - name: 🛠️ Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: 📦 Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build -p:GHPages=true --output publish
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build -p:GHPages=true -p:GHPagesBase="/try-azure-static-blazor-app/" --output publish
     - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -256,3 +262,4 @@ jobs:
 * [ASP\.NET Core Blazor WebAssembly をデバッグする \| Microsoft Docs](https://docs.microsoft.com/ja-jp/aspnet/core/blazor/debug?view=aspnetcore-3.1&tabs=visual-studio-code)
 * [Azure Static Web Apps の GitHub Actions ワークフロー \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/github-actions-workflow#build-and-deploy)
 * [Blazor WASM Publishing to GitHub Pages \- I ❤️ DotNet](https://ilovedotnet.org/blogs/blazor-wasm-publishing-to-github-pages/)
+* [jsakamoto/PublishSPAforGitHubPages\.Build: The NuGet package that provides post published processing to deploy the ASP\.NET Core SPA project \(such as Blazor WebAssembly\) as a GitHub pages site\.](https://github.com/jsakamoto/PublishSPAforGitHubPages.Build)
