@@ -1,7 +1,14 @@
 # try-azure-static-blazor-app
 Blazor アプリを Azure static web apps へデプロイしてみます。
 
+ついでなので GitHub Pages にもデプロイしてみます。
+
 ![Azure Static Web Apps CI/CD](https://github.com/MareMare/try-azure-static-blazor-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg?branch=master)
+
+## 実際にデプロイしたサイト
+
+* https://brave-stone-0645cc000.2.azurestaticapps.net/
+* https://maremare.github.io/try-azure-static-blazor-app/
 
 ## 前提条件
 
@@ -181,6 +188,65 @@ dotnet build
 
     ![07](images/07.png)
 
+## GitHub Pages へのデプロイ
+
+GitHub Pages へ発行するには次の調整が必要になるらしい。
+* `.nojekyll` ファイルの追加
+* `.gitattribute` ファイルの調整
+* `index.html` などに含まれるベースURLの変更
+* `404.html` の追加
+
+この煩わしい調整を
+[NuGet Gallery \| PublishSPAforGitHubPages\.Build 2\.0\.1](https://www.nuget.org/packages/PublishSPAforGitHubPages.Build/#readme-body-tab) という素晴らしいパッケージを利用すると自動化してくれる。
+
+使い方は次の通り：
+1. `PublishSPAforGitHubPages.Build` Nuget パッケージ参照を追加
+2. GitHub Actions でワークフローで `GHPages` MSBuild プロパティを指定して発行
+3. GitHub Pages の設定
+
+    ![](images/08.png)
+
+
+ワークフローの例：
+```yml
+name: GitHub Pages CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  CONFIGURATION: Release
+  DOTNET_CORE_VERSION: 6.0.x
+  WORKING_DIRECTORY: TryAzureStaticBlazorApp
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🛒 Checkout
+      uses: actions/checkout@master
+    - name: ✨ Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: 🚚 Restore
+      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
+    - name: 🛠️ Build
+      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: 📦 Publish
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build -p:GHPages=true --output publish
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: publish/wwwroot
+        force_orphan: true
+```
 
 ## 参考サイト
 * [チュートリアル:Azure Static Web Apps での Blazor を使用した静的 Web アプリのビルド \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/deploy-blazor?WT.mc_id=-blog-scottha)
@@ -188,3 +254,4 @@ dotnet build
 * [Blazor WebAssembly を触ってみる \- その②デバッグしてみる \- Qiita](https://qiita.com/chyonek/items/ef76e97d18904053fcf6)
 * [ASP\.NET Core Blazor WebAssembly をデバッグする \| Microsoft Docs](https://docs.microsoft.com/ja-jp/aspnet/core/blazor/debug?view=aspnetcore-3.1&tabs=visual-studio-code)
 * [Azure Static Web Apps の GitHub Actions ワークフロー \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/github-actions-workflow#build-and-deploy)
+* [Blazor WASM Publishing to GitHub Pages \- I ❤️ DotNet](https://ilovedotnet.org/blogs/blazor-wasm-publishing-to-github-pages/)
