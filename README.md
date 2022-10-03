@@ -66,7 +66,7 @@ dotnet build
     |項目|設定値|
     |---|---|
     |サブスクリプション|無料試用版|
-    |リソースグループ|(新規) rgStaticWebApps|
+    |リソースグループ|(新規) TryAzureStaticBlazorApp_group|
     |名前|TryAzureStaticBlazorApp|
     |地域|East Asia|
     |SKU|Free|
