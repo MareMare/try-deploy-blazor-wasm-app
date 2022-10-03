@@ -66,7 +66,7 @@ dotnet build
     |項目|設定値|
     |---|---|
     |サブスクリプション|無料試用版|
-    |リソースグループ|(新規) rgStaticWebApps|
+    |リソースグループ|(新規) TryAzureStaticBlazorApp_group|
     |名前|TryAzureStaticBlazorApp|
     |地域|East Asia|
     |SKU|Free|
@@ -106,63 +106,64 @@ dotnet build
         name: Azure Static Web Apps CI/CD
 
         on:
-        push:
+          push:
             branches:
-            - master
-        pull_request:
+              - main
+          pull_request:
             types: [opened, synchronize, reopened, closed]
             branches:
-            - master
+              - main
 
         jobs:
-        build_and_deploy_job:
+          build_and_deploy_job:
             if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
             runs-on: ubuntu-latest
             name: Build and Deploy Job
             steps:
-            - uses: actions/checkout@v2
+              - uses: actions/checkout@v2
                 with:
-                submodules: true
-            - name: Build And Deploy
+                  submodules: true
+              - name: Build And Deploy
                 id: builddeploy
-                uses: Azure/static-web-apps-deploy@v0.0.1-preview
+                uses: Azure/static-web-apps-deploy@v1
                 with:
-                azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AGREEABLE_FOREST_085413900 }}
-                repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-                action: "upload"
-                ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
-                # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-                app_location: "Client" # App source code path
-                api_location: "Api" # Api source code path - optional
-                app_artifact_location: "wwwroot" # Built app content directory - optional
-                ###### End of Repository/Build Configurations ######
+                  azure_static_web_apps_api_token: ${{ secrets.  AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_STONE_0645CC000 }}
+                  repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+                  action: "upload"
+                  ###### Repository/Build Configurations - These values can be configured to match your app   requirements. ######
+                  # For more information regarding Static Web App workflow configurations, please visit: https://aka.  ms/swaworkflowconfig
+                  app_location: "/TryAzureStaticBlazorApp" # App source code path
+                  api_location: "Api" # Api source code path - optional
+                  output_location: "wwwroot" # Built app content directory - optional
+                  ###### End of Repository/Build Configurations ######
 
         close_pull_request_job:
             if: github.event_name == 'pull_request' && github.event.action == 'closed'
             runs-on: ubuntu-latest
             name: Close Pull Request Job
             steps:
-            - name: Close Pull Request
+              - name: Close Pull Request
                 id: closepullrequest
-                uses: Azure/static-web-apps-deploy@v0.0.1-preview
+                uses: Azure/static-web-apps-deploy@v1
                 with:
-                azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AGREEABLE_FOREST_085413900 }}
-                action: "close"
+                  azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_STONE_0645CC000 }}
+                  action: "close"
         ```
     
     今回の環境用に `Build And Deploy` の設定を次のように変更してコミットします。
 
     |項目|修正前|修正後|
     |---|---|---|
-    |app_location|"Client"|app_location 要素を削除|
-    |api_location|"Api"|"/TryAzureStaticBlazorApp"|
+    |app_location|"Client"|"/TryAzureStaticBlazorApp"|
+    |api_location|"Api"|"Api"|
     |app_artifact_location|"wwwroot"|"wwwroot"|
 
     ```yml
-    ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
+    ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
     # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-    app_location: "/TryAzureStaticBlazorApp"
-    app_artifact_location: "wwwroot" # Built app content directory - optional
+    app_location: "/TryAzureStaticBlazorApp" # App source code path
+    api_location: "Api" # Api source code path - optional
+    output_location: "wwwroot" # Built app content directory - optional
     ###### End of Repository/Build Configurations ######
     ```
 
