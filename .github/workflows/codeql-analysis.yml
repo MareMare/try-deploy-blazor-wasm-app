@@ -38,16 +38,16 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Checkout repository
+    - name: 🛒 Checkout repository
       uses: actions/checkout@v3
 
-    - name: ✨ Set up .NET 6.0
+    - name: ✨ Setup .NET 6.0
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
 
     # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
+    - name: ✨ Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
@@ -61,7 +61,7 @@ jobs:
         
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
+    - name: 🛠️ Autobuild
       uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -74,7 +74,7 @@ jobs:
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
 
-    - name: Perform CodeQL Analysis
+    - name: 👀 Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
