@@ -5,6 +5,21 @@
 
 version: 2
 updates:
+  # github-actions の依存関係を維持します。
+  - package-ecosystem: "github-actions" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+      # 日本標準時 (UTC +09:00) に nuget の更新をチェックします。
+      time: "03:30"
+      timezone: "Asia/Tokyo"
+    # レビュー担当者を追加します。
+    reviewers:
+      - "MareMare"
+    # プルリクエストのラベルを指定します。
+    labels:
+      - "dependencies"
+
   # nuget の依存関係を維持します。
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/" # Location of package manifests
