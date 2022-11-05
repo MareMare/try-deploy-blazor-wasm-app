@@ -1,15 +1,15 @@
-# try-azure-static-blazor-app
-Blazor アプリを Azure static web apps へデプロイしてみます。
+# try-deploy-blazor-wasm-app
+Blazor wasm アプリを Azure static web apps へデプロイしてみます。
 
 ついでなので GitHub Pages にもデプロイしてみます。
 
-![Azure Static Web Apps CI/CD](https://github.com/MareMare/try-azure-static-blazor-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg?branch=main)
-[![GitHub Pages CI/CD](https://github.com/MareMare/try-azure-static-blazor-app/actions/workflows/deploy-to-ghpages.yml/badge.svg?branch=main)](https://github.com/MareMare/try-azure-static-blazor-app/actions/workflows/deploy-to-ghpages.yml)
+![Azure Static Web Apps CI/CD](https://github.com/MareMare/try-deploy-blazor-wasm-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg?branch=main)
+[![GitHub Pages CI/CD](https://github.com/MareMare/try-deploy-blazor-wasm-app/actions/workflows/deploy-to-ghpages.yml/badge.svg?branch=main)](https://github.com/MareMare/try-deploy-blazor-wasm-app/actions/workflows/deploy-to-ghpages.yml)
 
 ## 実際にデプロイしたサイト
 
 * https://brave-stone-0645cc000.2.azurestaticapps.net/
-* https://maremare.github.io/try-azure-static-blazor-app/
+* https://maremare.github.io/try-deploy-blazor-wasm-app/
 
 ## 前提条件
 
@@ -71,8 +71,8 @@ dotnet build
 
     ここでは次を設定し「確認および作成」をクリックします。
 
-    |項目|設定値|
-    |---|---|
+    |項目|設定値|備考|
+    |---|---|---|
     |サブスクリプション|無料試用版|
     |リソースグループ|(新規) TryAzureStaticBlazorApp_group|
     |名前|TryAzureStaticBlazorApp|
@@ -87,6 +87,8 @@ dotnet build
     |APIの場所|Api|
     |アプリの成果物の場所|wwwroot|
 
+    作成後にリポジトリの名前を変更しても追従してくれるみたい。
+    
 2. 静的 Web アプリの設定内容の確認
 
     ![03](images/03.png)
@@ -189,7 +191,7 @@ dotnet build
 
     ![07](images/07.png)
 
-## GitHub Pages へのデプロイ
+## GitHub Pages へのデプロイ準備
 
 GitHub Pages へ発行するには次の調整が必要になるらしい。
 * `.nojekyll` ファイルの追加
@@ -203,16 +205,38 @@ GitHub Pages へ発行するには次の調整が必要になるらしい。
 使い方は次の通り：
 1. `PublishSPAforGitHubPages.Build` Nuget パッケージ参照を追加
 2. GitHub Actions でワークフローで `GHPages` MSBuild プロパティを指定して発行
+
+    `gh-pages` ブランチへ発行
+
 3. GitHub Pages の設定
 
     ![](images/08.png)
 
-注意点：
+その他：
 * ベースURLを自分で指定したい
   * `GHPagesBase` MSBuild プロパティで指定できるらしい
     > If you want to specify the base URL by yourself, you can do it by setting the base URL to MSBuild property explicitly.
   * `-p:GHPages=true -p:GHPagesBase="/ベースURL/"`
-  * `index.html` で `<link href="favicon.ico" rel="icon" />`
+* favicon
+  * `index.html` で `<link href="favicon.ico" rel="icon" />` を指定
+
+## GitHub Pages へのデプロイ
+
+[peaceiris/actions\-gh\-pages: GitHub Actions for GitHub Pages 🚀 Deploy static files and publish your site easily\. Static\-Site\-Generators\-friendly\.](https://github.com/peaceiris/actions-gh-pages)
+
+発行された `gh-pages` ブランチから GitHub Pages へデプロイしてくれるアクションを使用。
+
+* CNAME を指定したい
+
+    [⭐️ Add CNAME file cname](https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-add-cname-file-cname)
+    ```yml
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        cname: github.com  // 👈 これ
+    ```
 
 ワークフローの例：
 ```yml
@@ -246,7 +270,7 @@ jobs:
     - name: 🛠️ Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: 📦 Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build -p:GHPages=true -p:GHPagesBase="/try-azure-static-blazor-app/" --output publish
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build -p:GHPages=true -p:GHPagesBase="/try-deploy-blazor-wasm-app/" --output publish
     - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
