@@ -289,3 +289,5 @@ jobs:
 * [Azure Static Web Apps の GitHub Actions ワークフロー \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/github-actions-workflow#build-and-deploy)
 * [Blazor WASM Publishing to GitHub Pages \- I ❤️ DotNet](https://ilovedotnet.org/blogs/blazor-wasm-publishing-to-github-pages/)
 * [jsakamoto/PublishSPAforGitHubPages\.Build: The NuGet package that provides post published processing to deploy the ASP\.NET Core SPA project \(such as Blazor WebAssembly\) as a GitHub pages site\.](https://github.com/jsakamoto/PublishSPAforGitHubPages.Build)
+* [Deploy a Blazor Site · Cloudflare Pages docs](https://developers.cloudflare.com/pages/framework-guides/deploy-a-blazor-site/#creating-the-build-script)
+
