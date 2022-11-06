@@ -1,7 +1,8 @@
 # try-deploy-blazor-wasm-app
-Blazor wasm アプリを Azure static web apps へデプロイしてみます。
-
-ついでなので GitHub Pages にもデプロイしてみます。
+Blazor wasm アプリを次のホスティングサービスへデプロイしてみます。
+* Azure static web apps
+* GitHub Pages
+* Cloudflare Pages
 
 ![Azure Static Web Apps CI/CD](https://github.com/MareMare/try-deploy-blazor-wasm-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg?branch=main)
 [![GitHub Pages CI/CD](https://github.com/MareMare/try-deploy-blazor-wasm-app/actions/workflows/deploy-to-ghpages.yml/badge.svg?branch=main)](https://github.com/MareMare/try-deploy-blazor-wasm-app/actions/workflows/deploy-to-ghpages.yml)
