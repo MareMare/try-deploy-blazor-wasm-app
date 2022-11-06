@@ -8,8 +8,9 @@ Blazor wasm アプリを Azure static web apps へデプロイしてみます。
 
 ## 実際にデプロイしたサイト
 
-* https://brave-stone-0645cc000.2.azurestaticapps.net/
-* https://maremare.github.io/try-deploy-blazor-wasm-app/
+* [Azure Static Web Apps (https://brave-stone-0645cc000.2.azurestaticapps.net/)](https://brave-stone-0645cc000.2.azurestaticapps.net/)
+* [GitHub Pages (https://maremare.github.io/try-deploy-blazor-wasm-app/)](https://maremare.github.io/try-deploy-blazor-wasm-app/)
+* [Cloudflare Pages (https://try-deploy-blazor-wasm-app.pages.dev/)](https://try-deploy-blazor-wasm-app.pages.dev/)
 
 ## 前提条件
 
