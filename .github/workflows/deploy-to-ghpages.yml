@@ -10,7 +10,7 @@ on:
 
 env:
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 6.0.x
+  DOTNET_CORE_VERSION: 7.0.x
   WORKING_DIRECTORY: TryAzureStaticBlazorApp
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: 🛒 Checkout
       uses: actions/checkout@v3.1.0
-    - name: ✨ Setup .NET Core
+    - name: ✨ Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
