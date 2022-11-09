@@ -41,10 +41,10 @@ jobs:
     - name: 🛒 Checkout repository
       uses: actions/checkout@v3.1.0
 
-    - name: ✨ Setup .NET 6.0
+    - name: ✨ Setup .NET 7.0
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
 
     # Initializes the CodeQL tools for scanning.
     - name: ✨ Initialize CodeQL
