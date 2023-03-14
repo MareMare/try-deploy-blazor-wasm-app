@@ -19,6 +19,8 @@ updates:
     # プルリクエストのラベルを指定します。
     labels:
       - "dependencies"
+    # Disable all pull requests for nuget dependencies
+    open-pull-requests-limit: 0
 
   # nuget の依存関係を維持します。
   - package-ecosystem: "nuget" # See documentation for possible values
@@ -36,5 +38,5 @@ updates:
       - "dependencies"
     # バージョン更新のプルリクエストを発行します。
     target-branch: "main"
-    # Allow up to 10 open pull requests for dependencies
-    open-pull-requests-limit: 10
+    # Disable all pull requests for nuget dependencies
+    open-pull-requests-limit: 0
