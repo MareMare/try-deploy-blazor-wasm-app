@@ -282,6 +282,30 @@ jobs:
         force_orphan: true
 ```
 
+## Cloudflare Pages
+[Deploy a Blazor Site · Cloudflare Pages docs](https://developers.cloudflare.com/pages/framework-guides/deploy-a-blazor-site/#creating-the-build-script)
+deploy
+<details>
+<summary>詳細：</summary>
+
+![](images/cloudflare-pages-config.png)
+
+</details>
+
+* ビルドの構成
+  * ビルドコマンド
+    ```sh
+    curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh;
+    chmod +x dotnet-install.sh;
+    ./dotnet-install.sh -c 7.0 -InstallDir ./dotnet7;
+    ./dotnet7/dotnet --version;
+    ./dotnet7/dotnet publish "src/blazorwasm-standalone-singleOrg" -c Release -o output;
+    ```
+  * ビルド出力ディレクトリ
+    ```sh
+    /output/wwwroot
+    ```
+
 ## 参考サイト
 * [チュートリアル:Azure Static Web Apps での Blazor を使用した静的 Web アプリのビルド \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/deploy-blazor?WT.mc_id=-blog-scottha)
 * [Azure Static Web Apps with \.NET and Blazor \| ASP\.NET Blog](https://devblogs.microsoft.com/aspnet/azure-static-web-apps-with-blazor/)
