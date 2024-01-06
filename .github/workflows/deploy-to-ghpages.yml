@@ -10,7 +10,7 @@ on:
 
 env:
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 7.0.x
+  DOTNET_VERSION: 8.0.x
   WORKING_DIRECTORY: TryAzureStaticBlazorApp
 
 jobs:
@@ -22,7 +22,9 @@ jobs:
     - name: ✨ Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: ⚙️ Install wasm-tools
+      run: dotnet workload install wasm-tools
     - name: 🚚 Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: 🛠️ Build

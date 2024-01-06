@@ -1,37 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32922.545
-MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryAzureStaticBlazorApp", "TryAzureStaticBlazorApp\TryAzureStaticBlazorApp.csproj", "{D6DE3473-21FE-4711-AD01-BF2E80B6952E}"
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryAzureStaticBlazorApp", "TryAzureStaticBlazorApp\TryAzureStaticBlazorApp.csproj", "{7591661E-577A-4849-98D7-2E8516327437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|x64.Build.0 = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Debug|x86.Build.0 = Debug|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|x64.ActiveCfg = Release|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|x64.Build.0 = Release|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|x86.ActiveCfg = Release|Any CPU
-		{D6DE3473-21FE-4711-AD01-BF2E80B6952E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D8511F01-7D2F-4C76-81AC-0AAE83F08989}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7591661E-577A-4849-98D7-2E8516327437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7591661E-577A-4849-98D7-2E8516327437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7591661E-577A-4849-98D7-2E8516327437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7591661E-577A-4849-98D7-2E8516327437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
