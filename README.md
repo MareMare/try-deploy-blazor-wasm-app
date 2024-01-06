@@ -12,12 +12,12 @@ Blazor wasm アプリを次のホスティングサービスへデプロイし�
 * [Azure Static Web Apps (https://brave-stone-0645cc000.2.azurestaticapps.net/)](https://brave-stone-0645cc000.2.azurestaticapps.net/)
 * [GitHub Pages (https://maremare.github.io/try-deploy-blazor-wasm-app/)](https://maremare.github.io/try-deploy-blazor-wasm-app/)
 * [Cloudflare Pages (https://try-deploy-blazor-wasm-app.pages.dev/)](https://try-deploy-blazor-wasm-app.pages.dev/)
-  * [Cloudflare Pages (https://wasm2.trypage.tk/)](https://wasm2.trypage.tk/)
 
 ## 前提条件
 
 * Azure アカウント
 * GitHub アカウント
+* Cloudflare アカウント
 
 ## アプリケーションの作成
 
@@ -203,7 +203,7 @@ GitHub Pages へ発行するには次の調整が必要になるらしい。
 * `404.html` の追加
 
 この煩わしい調整を
-[NuGet Gallery \| PublishSPAforGitHubPages\.Build 2\.0\.1](https://www.nuget.org/packages/PublishSPAforGitHubPages.Build/#readme-body-tab) という素晴らしいパッケージを利用すると自動化してくれる。
+[NuGet Gallery \| PublishSPAforGitHubPages\.Build](https://www.nuget.org/packages/PublishSPAforGitHubPages.Build/#readme-body-tab) という素晴らしいパッケージを利用すると自動化してくれる。
 
 使い方は次の通り：
 1. `PublishSPAforGitHubPages.Build` Nuget パッケージ参照を追加
@@ -255,7 +255,7 @@ on:
 
 env:
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 6.0.x
+  DOTNET_VERSION: 8.0.x
   WORKING_DIRECTORY: TryAzureStaticBlazorApp
 
 jobs:
@@ -263,11 +263,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🛒 Checkout
-      uses: actions/checkout@master
-    - name: ✨ Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/checkout@v4.1.1
+    - name: ✨ Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: ⚙️ Install wasm-tools
+      run: dotnet workload install wasm-tools
     - name: 🚚 Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: 🛠️ Build
@@ -297,14 +299,22 @@ deploy
     ```sh
     curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh;
     chmod +x dotnet-install.sh;
-    ./dotnet-install.sh -c 7.0 -InstallDir ./dotnet7;
-    ./dotnet7/dotnet --version;
-    ./dotnet7/dotnet publish "src/blazorwasm-standalone-singleOrg" -c Release -o output;
+    ./dotnet-install.sh -c 8.0 -InstallDir ./dotnet8;
+    ./dotnet8/dotnet --version;
+    ./dotnet8/dotnet workload install wasm-tools;
+    ./dotnet8/dotnet publish "TryAzureStaticBlazorApp" -c Release -o output;
     ```
   * ビルド出力ディレクトリ
     ```sh
     /output/wwwroot
     ```
+
+## Run Blazor Web Assembly locally
+* [natemcmaster/dotnet\-serve: Simple command\-line HTTPS server for the \.NET Core CLI](https://github.com/natemcmaster/dotnet-serve)
+  ```ps1
+  dotnet publish TryAzureStaticBlazorApp -c release -o publish
+  dotnet serve -o -S -p:7014 -b -d:publish/wwwroot
+  ```
 
 ## 参考サイト
 * [チュートリアル:Azure Static Web Apps での Blazor を使用した静的 Web アプリのビルド \| Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/static-web-apps/deploy-blazor?WT.mc_id=-blog-scottha)
