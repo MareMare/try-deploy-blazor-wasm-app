@@ -39,7 +39,7 @@ jobs:
 
     steps:
     - name: 🛒 Checkout repository
-      uses: actions/checkout@v4.2.1
+      uses: actions/checkout@v4.2.2
 
     - name: ✨ Setup .NET 8.0
       uses: actions/setup-dotnet@v4
