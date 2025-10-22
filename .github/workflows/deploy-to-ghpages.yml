@@ -24,7 +24,9 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: ⚙️ Install wasm-tools
-      run: dotnet workload install wasm-tools
+      run: |
+          dotnet workload install wasm-tools-net8 --verbosity minimal || \
+          dotnet workload install wasm-tools --verbosity minimal
     - name: 🚚 Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: 🛠️ Build
