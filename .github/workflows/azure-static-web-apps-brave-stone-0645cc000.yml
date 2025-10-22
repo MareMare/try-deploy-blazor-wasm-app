@@ -19,7 +19,9 @@ jobs:
         with:
           submodules: true
       - name: Install wasm-tools
-        run: dotnet workload install wasm-tools
+        run: |
+            dotnet workload install wasm-tools-net8 --verbosity minimal || \
+            dotnet workload install wasm-tools --verbosity minimal
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
