@@ -1,6 +1,6 @@
 {
 	"name": "C# (.NET)",
-	"image": "mcr.microsoft.com/dotnet/sdk:8.0",
+	"image": "mcr.microsoft.com/dotnet/sdk:10.0",
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "none"
